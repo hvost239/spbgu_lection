@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package Index;
+
+message WordPos {
+    int32 doc_id = 1;
+};
+
+message TermDocs {
+    repeated WordPos docs = 1;
+}
+
+message InvIndex {
+    repeated TermDocs term_docs = 1;
+};
+
+message KeyIndex {
+    map<string, int32> term_index = 1;
+};
+
+message Properties {
+    message Property {
+        string url = 1;
+        string title = 2;
+    }
+
+    repeated Property properies = 1;
+};
