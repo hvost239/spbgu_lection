@@ -1,5 +1,6 @@
 import scrapy
 import w3lib.html
+import json
 
 
 class ProgramSpider(scrapy.Spider):
@@ -21,9 +22,16 @@ class ProgramSpider(scrapy.Spider):
         content = response.css("main").getall()
         content_without_tags = w3lib.html.remove_tags(str(content))
         words = content_without_tags.split()
-        words = set([w.lower() for w in words if w.isalpha()])
+        words = list(set([w.lower() for w in words if w.isalpha()]))
+
+        data = {
+            'url': url,
+            'title' : title,
+            'words' : words
+        }
+
         with open("out/{}.dat".format(title), 'w') as f:
-            f.write("\n".join(words))
+            f.write(json.dumps(data, indent=4, sort_keys=True, ensure_ascii=True))
 
     def parse_main(self, response):
         for page in response.css('a.card-program::attr(href)').getall():

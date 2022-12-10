@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+    </head>
+    <form action="/search">
+        <div class="wrap">
+            <div class="search">
+               <input type="text" class="searchTerm" placeholder="Введите текст" name="text">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+        </div>
+    </form>
+</html>
